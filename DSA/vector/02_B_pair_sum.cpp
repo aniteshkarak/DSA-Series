@@ -20,8 +20,7 @@ vector<int> Pairsum(vector<int>nums, int target ){
             ans.push_back(i);
             ans.push_back(j);
             return ans;
-        }
-        
+        } 
     }
 }
 int main(){
