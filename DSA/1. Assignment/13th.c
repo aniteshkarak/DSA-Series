@@ -1,7 +1,7 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Node structure */
 struct node {
     int data;
     struct node *next;
@@ -9,7 +9,6 @@ struct node {
 
 struct node *top = NULL;
 
-/* Push operation */
 void push(int value) {
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = value;
@@ -18,7 +17,6 @@ void push(int value) {
     printf("Pushed: %d\n", value);
 }
 
-/* Pop operation */
 void pop() {
     if (top == NULL) {
         printf("Stack Underflow\n");
@@ -30,14 +28,12 @@ void pop() {
     }
 }
 
-/* Display operation */
 void display() {
     struct node *temp = top;
     if (temp == NULL) {
         printf("Stack is empty\n");
         return;
     }
-
     printf("Stack elements:\n");
     while (temp != NULL) {
         printf("%d\n", temp->data);
