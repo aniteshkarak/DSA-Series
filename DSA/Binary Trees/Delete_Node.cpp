@@ -16,8 +16,8 @@ public:
 Node* insert(Node* root, int val){
     if(root == NULL){
         return new Node(val);
-    }       
-
+    }
+   
     if(val < root->data){
         root->left = insert(root->left, val);
     }
@@ -37,21 +37,28 @@ Node* buildBST(vector<int> arr){
     return root;
 }
 
-void inorder(Node* root){
+bool search(Node* root, int key){
     if(root == NULL){
-        return;
+        return false;
     }
 
-    inorder(root->left);
-    cout << root->data << " ";
-    inorder(root->right);
+    if(root->data == key){
+        return true;
+    }
+
+    if(key < root->data){
+        return search(root->left, key);
+    }
+    else{
+        return search(root->right, key);
+    }
 }
 
 int main(){
     vector<int> arr = {3, 2, 1, 5, 6, 4};
 
     Node* root = buildBST(arr);
-    inorder(root);
+    // inorder(root);
+    cout << search(root, 8) << endl;
     cout << endl;
 }
-
