@@ -54,11 +54,64 @@ bool search(Node* root, int key){
     }
 }
 
+void inorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+Node* getInorderSuccessor(Node* root){
+    while(root->left != NULL && root->right != NULL){
+        root = root->left;
+    }
+    return root;
+}
+
+Node* delnode(Node* root, int key){
+    if(root == NULL){
+        return NULL;
+    }
+
+    if(key < root->data){
+        root->left = delnode(root->left, key);
+    }
+    else if(key > root->data){
+        root->right = delnode(root->right, key);
+    }
+    else{ // root == key
+        if(root->left == NULL){
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if(root->right == NULL){
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        else{
+            Node* IS = getInorderSuccessor(root->right);
+            root->data = IS->data;
+            root->right = delnode(root->right, IS->data);
+        }
+    }
+    return root;
+}
+
 int main(){
     vector<int> arr = {3, 2, 1, 5, 6, 4};
 
     Node* root = buildBST(arr);
-    // inorder(root);
-    cout << search(root, 8) << endl;
+    cout<< "Before Deletion: ";
+    inorder(root);
     cout << endl;
+
+    cout<< "After Deletion: ";
+    delnode(root,6);
+    inorder(root);
+    cout<< endl;
 }
